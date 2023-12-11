@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="@string/autenticated_menu_item_home_title"
+        android:id="@+id/homeFragment"
+        android:icon="@drawable/ic_home" />
+
+    <item android:title="@string/autenticated_menu_item_deputados_title"
+        android:id="@+id/deputadosFragment"
+        android:icon="@drawable/ic_congressman" />
+
+    <item android:title="@string/autenticated_menu_item_settings_title"
+        android:id="@+id/settingsFragment"
+        android:icon="@drawable/ic_settings" />
+
+    <item android:title="@string/autenticated_menu_item_profile_title"
+        android:id="@+id/profileFragment"
+        android:icon="@drawable/ic_person" />
+</menu>

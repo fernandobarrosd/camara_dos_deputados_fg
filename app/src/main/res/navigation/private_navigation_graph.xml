@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/private_navigation_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.fernando.camara_dos_deputados_fg.private_screens.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home"/>
+    <fragment
+        android:id="@+id/deputadosFragment"
+        android:name="com.fernando.camara_dos_deputados_fg.private_screens.DeputadosFragment"
+        android:label="DeputadosFragment"
+        tools:layout="@layout/fragment_deputados"/>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.fernando.camara_dos_deputados_fg.private_screens.SettingsFragment"
+        android:label="SettingsFragment"
+        tools:layout="@layout/fragment_settings">
+
+        <action
+            android:id="@+id/action_settingsFragment_to_updateActivity"
+            app:destination="@id/updateActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.fernando.camara_dos_deputados_fg.private_screens.ProfileFragment"
+        android:label="ProfileFragment"
+        tools:layout="@layout/fragment_profile"/>
+    <activity
+        android:id="@+id/updateActivity"
+        android:name="com.fernando.camara_dos_deputados_fg.private_screens.UpdateActivity"
+        android:label="activity_update"
+        tools:layout="@layout/activity_update" >
+        <argument
+            android:name="fragment"
+            app:argType="string" />
+    </activity>
+
+
+</navigation>

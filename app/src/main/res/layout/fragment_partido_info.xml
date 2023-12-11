@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".private_screens.PartidoInfoFragment"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:background="@color/white"
+        android:backgroundTint="#494545"
+        android:padding="10dp"
+        android:src="@drawable/ic_person_group"
+        app:tint="#CDC8C8" />
+
+    <TextView
+        android:id="@+id/partidoNomeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Partidos dos trabalhadores"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/partidoSiglaTextView"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="PT"
+        android:textColor="@color/black"
+        android:textSize="12sp"/>
+</LinearLayout>

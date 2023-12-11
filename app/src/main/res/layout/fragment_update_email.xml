@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <EditText
+        android:id="@+id/oldEmailEditText"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:backgroundTint="#68D3A8"
+        android:hint="E-mail antigo"
+        android:inputType="textEmailAddress"
+        android:textColorHint="#D5CFCF"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/newEmailEditText"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="#68D3A8"
+        android:hint="E-mail novo"
+        android:inputType="textEmailAddress"
+        android:textColorHint="#D5CFCF"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/updateEmailButton"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@null"
+        android:background="@drawable/bg_radius"
+        android:textColor="@color/black"
+        android:layout_marginTop="60dp"
+        android:text="Atualizar o e-mail"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:visibility="visible"
+        android:allowClickWhenDisabled="false" />
+
+</LinearLayout>
