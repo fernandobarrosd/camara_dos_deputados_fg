@@ -64,7 +64,7 @@ class LoginFragment : Fragment() {
                                     )
                                 }
                                 .addOnFailureListener {
-                                    it.printStackTrace()
+                                    println(it.message)
                                 }
                         }
                 }

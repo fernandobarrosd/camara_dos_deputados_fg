@@ -46,7 +46,7 @@ class DeputadosFragment : Fragment() {
 
 
     private fun requestDeputados() {
-        deputadoService.findAllDeputados("ASC", "nome", 40)
+        deputadoService.findAllDeputados("ASC", "nome", 500)
             .enqueue(object: Callback<DeputadoList>{
                 override fun onResponse(call: Call<DeputadoList>, response: Response<DeputadoList>) {
                     if (binding.root.isRefreshing) {

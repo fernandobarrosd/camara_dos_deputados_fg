@@ -9,7 +9,11 @@
         android:id="@+id/homeFragment"
         android:name="com.fernando.camara_dos_deputados_fg.private_screens.HomeFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/fragment_home"/>
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_partidoInfoFragment"
+            app:destination="@id/partidoInfoFragment" />
+    </fragment>
     <fragment
         android:id="@+id/deputadosFragment"
         android:name="com.fernando.camara_dos_deputados_fg.private_screens.DeputadosFragment"
@@ -20,10 +24,9 @@
         android:name="com.fernando.camara_dos_deputados_fg.private_screens.SettingsFragment"
         android:label="SettingsFragment"
         tools:layout="@layout/fragment_settings">
-
         <action
-            android:id="@+id/action_settingsFragment_to_updateActivity"
-            app:destination="@id/updateActivity" />
+            android:id="@+id/action_settingsFragment_to_updatePasswordActivity"
+            app:destination="@id/updatePasswordActivity" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -31,14 +34,19 @@
         android:label="ProfileFragment"
         tools:layout="@layout/fragment_profile"/>
     <activity
-        android:id="@+id/updateActivity"
-        android:name="com.fernando.camara_dos_deputados_fg.private_screens.UpdateActivity"
-        android:label="activity_update"
-        tools:layout="@layout/activity_update" >
+        android:id="@+id/updatePasswordActivity"
+        android:name="com.fernando.camara_dos_deputados_fg.private_screens.UpdatePasswordActivity"
+        android:label="activity_update_password"
+        tools:layout="@layout/activity_update_password" />
+    <fragment
+        android:id="@+id/partidoInfoFragment"
+        android:name="com.fernando.camara_dos_deputados_fg.private_screens.PartidoInfoFragment"
+        android:label="fragment_partido_info"
+        tools:layout="@layout/fragment_partido_info" >
         <argument
-            android:name="fragment"
-            app:argType="string" />
-    </activity>
+            android:name="id"
+            app:argType="long" />
+    </fragment>
 
 
 </navigation>

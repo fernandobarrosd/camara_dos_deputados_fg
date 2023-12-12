@@ -17,7 +17,7 @@
             android:name=".private_screens.PrivateActivity"
             android:exported="false" />
 
-        <activity android:name=".private_screens.UpdateActivity"
+        <activity android:name=".private_screens.UpdatePasswordActivity"
             android:exported="false"/>
         <activity
             android:name=".MainActivity"

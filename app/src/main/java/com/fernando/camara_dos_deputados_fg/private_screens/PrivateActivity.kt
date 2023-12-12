@@ -25,8 +25,6 @@ class PrivateActivity : AppCompatActivity() {
 
 
 
-
-
     private fun initNavigation() {
         val navHostFragment =  supportFragmentManager.findFragmentById(binding.fragmentContainer.id) as NavHostFragment
         val navController = navHostFragment.navController

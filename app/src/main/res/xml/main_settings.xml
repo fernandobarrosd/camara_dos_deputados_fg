@@ -10,12 +10,6 @@
 
 
     <Preference
-        app:key="updateEmail"
-        app:title="Atualizar e-mail"
-        app:summary="Atualizar o e-mail da conta"
-        app:layout="@layout/layout_preference"/>
-
-    <Preference
         app:key="logout"
         app:title="Sair"
         app:summary="Sair da conta"
