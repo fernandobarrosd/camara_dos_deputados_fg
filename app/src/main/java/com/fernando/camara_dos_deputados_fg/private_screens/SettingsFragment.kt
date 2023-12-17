@@ -9,8 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import androidx.preference.Preference
 import androidx.preference.Preference.OnPreferenceClickListener
 import androidx.preference.PreferenceFragmentCompat
@@ -19,128 +17,107 @@ import com.fernando.camara_dos_deputados_fg.R
 import com.fernando.camara_dos_deputados_fg.databinding.FragmentSettingsBinding
 import com.fernando.camara_dos_deputados_fg.factories.GoogleSignInClientFactory
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 
 
-class SettingsFragment : Fragment() {
-    private lateinit var binding: FragmentSettingsBinding
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?): View {
-        binding = FragmentSettingsBinding.inflate(layoutInflater, container, false)
-        return binding.root
+class SettingsFragment : PreferenceFragmentCompat() {
+    private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var googleSignActivityResultLauncher: ActivityResultLauncher<Intent>
+    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+        setPreferencesFromResource(R.xml.main_settings, rootKey)
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initActivityResultLauncher()
+        initFirebaseAuth()
+        initCurrentAccountPreference()
+        initListeners()
 
-        parentFragmentManager.beginTransaction()
-            .replace(binding.fragmentContainerView.id, PreferencesFragment())
-            .commit()
     }
 
-    class PreferencesFragment :  PreferenceFragmentCompat() {
-        private lateinit var firebaseAuth: FirebaseAuth
-        private lateinit var googleSignActivityResultLauncher: ActivityResultLauncher<Intent>
-        override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-            setPreferencesFromResource(R.xml.main_settings, rootKey)
-        }
+    private fun initCurrentAccountPreference() {
+        val currentAccountPreference = createCurrentAccountEmailPreference()
+        preferenceScreen.addPreference(currentAccountPreference)
+    }
 
-        override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-            super.onViewCreated(view, savedInstanceState)
-            initActivityResultLauncher()
-            initFirebaseAuth()
-            initCurrentAccountPreference()
-            initListeners()
-
-        }
-
-        private fun initCurrentAccountPreference() {
-            val currentAccountPreference = createCurrentAccountEmailPreference()
-            preferenceScreen.addPreference(currentAccountPreference)
-        }
-
-        private fun initFirebaseAuth() {
-            firebaseAuth = FirebaseAuth.getInstance()
-        }
+    private fun initFirebaseAuth() {
+        firebaseAuth = FirebaseAuth.getInstance()
+    }
 
 
-        private fun initActivityResultLauncher() {
-            googleSignActivityResultLauncher =
-                registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-                    val resultIntent = result.data
-                    val resultCode = result.resultCode
-                    if (resultCode == Activity.RESULT_OK && resultIntent != null) {
-                        GoogleSignIn.getSignedInAccountFromIntent(resultIntent)
-                            .addOnSuccessListener { account ->
-                                val authCredential =
-                                    GoogleAuthProvider.getCredential(account.idToken, null)
-                                firebaseAuth.currentUser?.let {user ->
-                                    user.reauthenticate(authCredential)
-                                        .addOnSuccessListener {
-                                            user.reload()
-                                        }
+    private fun initActivityResultLauncher() {
+        googleSignActivityResultLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                val resultIntent = result.data
+                val resultCode = result.resultCode
+                if (resultCode == Activity.RESULT_OK && resultIntent != null) {
+                    GoogleSignIn.getSignedInAccountFromIntent(resultIntent)
+                        .addOnSuccessListener { account ->
+                            val authCredential =
+                                GoogleAuthProvider.getCredential(account.idToken, null)
+                            firebaseAuth.currentUser?.let { user ->
+                                user.reauthenticate(authCredential)
+                                    .addOnSuccessListener {
+                                        user.reload()
+                                    }
 
-                                }
                             }
-                    }
+                        }
                 }
+            }
+    }
+
+    private fun createCurrentAccountEmailPreference(): Preference {
+
+        return Preference(preferenceScreen.context).apply {
+            key = "contaAtual"
+            title = "Conta atual"
+            summary = firebaseAuth.currentUser?.email
+            layoutResource = R.layout.layout_preference
         }
-
-        private fun createCurrentAccountEmailPreference() : Preference {
-
-            return Preference(preferenceScreen.context).apply {
-                key = "contaAtual"
-                title = "Conta atual"
-                summary = firebaseAuth.currentUser?.email
-                layoutResource = R.layout.layout_preference
-            }
-        }
+    }
 
 
-
-        private fun initListeners() {
-            findPreference<Preference>("updatePassword")
-                ?.onPreferenceClickListener = OnPreferenceClickListener {
-                findNavController().navigate(R.id.action_settingsFragment_to_updatePasswordActivity)
-                return@OnPreferenceClickListener true
-            }
-
-
-            findPreference<Preference>("logout")
-                ?.onPreferenceClickListener = OnPreferenceClickListener {
-                val alertDialog = AlertDialog.Builder(it.context)
-                    .apply {
-                        setTitle("Sair da conta")
-                            .setMessage("Deseja sair da conta")
-                            .setPositiveButton("Sim") { dialog, _ ->
-
-
-                                dialog.dismiss()
-                                firebaseAuth.signOut()
-                                startActivity(Intent(requireContext(), MainActivity::class.java))
-                            }
-                            .setNegativeButton("Cancelar") { dialog, _ -> dialog.dismiss() }
-                    }
-
-                alertDialog.create().show()
-                return@OnPreferenceClickListener true
-            }
-
-            findPreference<Preference>("contaAtual")
-                ?.onPreferenceClickListener = OnPreferenceClickListener {
-                    val signInClient = GoogleSignInClientFactory.createClient(it.context)
-                    val googleSignInIntent = signInClient.signInIntent
-                    googleSignActivityResultLauncher.launch(googleSignInIntent)
-                    return@OnPreferenceClickListener true
-            }
+    private fun initListeners() {
+        findPreference<Preference>("updatePassword")
+            ?.onPreferenceClickListener = OnPreferenceClickListener {
+            return@OnPreferenceClickListener true
         }
 
 
+        findPreference<Preference>("logout")
+            ?.onPreferenceClickListener = OnPreferenceClickListener {
+            val alertDialog = AlertDialog.Builder(it.context)
+                .apply {
+                    setTitle("Sair da conta")
+                        .setMessage("Deseja sair da conta")
+                        .setPositiveButton("Sim") { dialog, _ ->
 
+
+                            dialog.dismiss()
+                            firebaseAuth.signOut()
+                            startActivity(Intent(requireContext(), MainActivity::class.java))
+                        }
+                        .setNegativeButton("Cancelar") { dialog, _ -> dialog.dismiss() }
+                }
+
+            alertDialog.create().show()
+            return@OnPreferenceClickListener true
+        }
+
+        findPreference<Preference>("contaAtual")
+            ?.onPreferenceClickListener = OnPreferenceClickListener {
+            val signInClient = GoogleSignInClientFactory.createClient(it.context)
+            val googleSignInIntent = signInClient.signInIntent
+            googleSignActivityResultLauncher.launch(googleSignInIntent)
+            return@OnPreferenceClickListener true
+        }
     }
 }
+
+
+
+

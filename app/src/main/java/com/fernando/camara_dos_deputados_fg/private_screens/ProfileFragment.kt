@@ -20,14 +20,14 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initProfile()
+        //initProfile()
     }
 
     private fun initProfile() {
         val firebaseAuth = FirebaseAuth.getInstance()
         val user = firebaseAuth.currentUser
         binding.apply {
-            userEmailTextView.text = user?.email
+            user?.email?.let { emailCardText.setText(it) }
         }
     }
 }

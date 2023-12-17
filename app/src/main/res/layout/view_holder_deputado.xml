@@ -39,7 +39,8 @@
             android:layout_height="wrap_content"
             android:text="PT"
             android:textColor="@color/black"
-            android:textSize="12sp"/>
+            android:textSize="12sp"
+            android:layout_marginTop="5dp"/>
 
     </LinearLayout>
 

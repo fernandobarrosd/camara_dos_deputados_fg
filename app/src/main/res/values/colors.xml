@@ -13,4 +13,7 @@
     <color name="light_blue_600">#FF039BE5</color>
     <color name="gray_400">#FFBDBDBD</color>
     <color name="gray_600">#FF757575</color>
+    <color name="squeleton_bg_color_1">#535252</color>
+    <color name="squeleton_bg_color_2">#2E2D2D</color>
+    <color name="squeleton_bg_color_3">#424141</color>
 </resources>

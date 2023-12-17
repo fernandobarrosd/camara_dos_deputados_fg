@@ -4,32 +4,37 @@ import android.app.AlertDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.AdapterView.OnItemSelectedListener
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI.setupWithNavController
+import com.fernando.camara_dos_deputados_fg.ActivityViewBinding
 import com.fernando.camara_dos_deputados_fg.MainActivity
 import com.fernando.camara_dos_deputados_fg.databinding.ActivityPrivateBinding
 import com.fernando.camara_dos_deputados_fg.R
+import com.fernando.camara_dos_deputados_fg.public_screens.WelcomeActivity
 import com.google.firebase.auth.FirebaseAuth
 
-class PrivateActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityPrivateBinding
+class PrivateActivity : ActivityViewBinding<ActivityPrivateBinding>() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityPrivateBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        setSupportActionBar(binding.toolbar)
-        initNavigation()
+        initToolbar()
+        initFirstScreen()
     }
 
 
+    override fun onResume() {
+        super.onResume()
+        initListeners()
+    }
 
-    private fun initNavigation() {
-        val navHostFragment =  supportFragmentManager.findFragmentById(binding.fragmentContainer.id) as NavHostFragment
-        val navController = navHostFragment.navController
-
-        setupWithNavController(binding.bottomNavigation, navController)
+    override fun inflate(layoutInflater: LayoutInflater): ActivityPrivateBinding {
+        return ActivityPrivateBinding.inflate(layoutInflater)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -47,8 +52,9 @@ class PrivateActivity : AppCompatActivity() {
 
                         dialog.dismiss()
                         firebaseAuth.signOut()
-                        startActivity(Intent(context, MainActivity::class.java))
-                        finish()
+                        goToWelcomeScreen()
+
+
                     }
                     .setNegativeButton("Cancelar") { dialog, _ -> dialog.dismiss() }
             }
@@ -56,4 +62,47 @@ class PrivateActivity : AppCompatActivity() {
         alertDialog.create().show()
         return true
     }
+
+    private fun initToolbar() {
+        setSupportActionBar(binding.toolbar)
+    }
+
+    private fun goToWelcomeScreen() {
+        startActivity(Intent(this, WelcomeActivity::class.java))
+    }
+
+    private fun initFirstScreen() {
+        supportFragmentManager.commit {
+            replace(binding.fragmentContainer.id, HomeFragment())
+        }
+    }
+
+    private fun initListeners() {
+        binding.bottomNavigation.setOnItemSelectedListener {menuItem ->
+            val itemId = menuItem.itemId
+            var fragment : Fragment? = null
+
+            if (itemId == R.id.homeFragment) {
+                fragment = HomeFragment()
+            }
+            else if (itemId == R.id.profileFragment) {
+                fragment = ProfileFragment()
+            }
+            else if (itemId == R.id.settingsFragment) {
+                fragment = SettingsFragment()
+            }
+            else if (itemId == R.id.deputadosFragment) {
+                fragment = DeputadosFragment()
+            }
+
+            supportFragmentManager.commit {
+                if (fragment != null) {
+                    replace(binding.fragmentContainer.id, fragment)
+                }
+            }
+            return@setOnItemSelectedListener true
+        }
+    }
+
+
 }

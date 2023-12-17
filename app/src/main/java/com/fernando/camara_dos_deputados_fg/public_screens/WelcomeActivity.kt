@@ -2,58 +2,44 @@ package com.fernando.camara_dos_deputados_fg.public_screens
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-import com.fernando.camara_dos_deputados_fg.R
-import com.fernando.camara_dos_deputados_fg.databinding.FragmentWelcomeBinding
+import com.fernando.camara_dos_deputados_fg.ActivityViewBinding
+import com.fernando.camara_dos_deputados_fg.databinding.ActivityWelcomeBinding
 import com.google.firebase.auth.FirebaseAuth
 
-class WelcomeFragment : Fragment() {
-    private lateinit var binding: FragmentWelcomeBinding
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentWelcomeBinding.inflate(inflater, container, false)
-        return binding.root
+class WelcomeActivity : ActivityViewBinding<ActivityWelcomeBinding>() {
+    override fun inflate(layoutInflater: LayoutInflater): ActivityWelcomeBinding {
+        return ActivityWelcomeBinding.inflate(layoutInflater)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onResume() {
+        super.onResume()
         initListeners()
     }
 
     override fun onStart() {
         super.onStart()
-
-        val firebase = FirebaseAuth.getInstance()
-
         if (!hasNetwork()) {
-            val alertDialog = AlertDialog.Builder(requireContext())
+            val alertDialog = AlertDialog.Builder(this)
                 .apply {
                     setTitle("Intenet error")
                     setMessage("Erro ao tentar se conectar a internet")
                     setPositiveButton("Ok") { dialog, item ->
-                        requireActivity().finish()
+                        finish()
                     }
                 }
             alertDialog.create().show()
         }
-
-        if (firebase.currentUser != null)
-            findNavController().navigate(R.id.action_welcomeFragment_to_privateActivity)
     }
 
     private fun hasNetwork(): Boolean {
-        val connectionManager = requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val connectionManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
         val network = connectionManager.activeNetwork ?: return false
+
         val capabilities = connectionManager.getNetworkCapabilities(network) ?: return false
         val transporters : List<Int> = listOf(
             NetworkCapabilities.TRANSPORT_WIFI,
@@ -74,11 +60,13 @@ class WelcomeFragment : Fragment() {
     private fun initListeners() {
         binding.let {
             it.loginButton.setOnClickListener {
-                findNavController().navigate(R.id.action_welcomeFragment_to_loginFragment2)
+                startActivity(Intent(this, LoginActivity::class.java))
+                finish()
             }
 
             it.registerButton.setOnClickListener {
-                findNavController().navigate(R.id.action_welcomeFragment_to_registerFragment)
+                startActivity(Intent(this, RegisterActivity::class.java))
+                finish()
             }
         }
     }

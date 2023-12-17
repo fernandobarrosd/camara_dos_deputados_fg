@@ -13,11 +13,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CamaraDosDeputadosFG">
-        <activity
-            android:name=".private_screens.PrivateActivity"
-            android:exported="false" />
 
         <activity android:name=".private_screens.UpdatePasswordActivity"
+            android:exported="false"/>
+
+        <activity android:name=".public_screens.LoginActivity"
+            android:exported="false"/>
+
+        <activity android:name=".public_screens.RegisterActivity"
+            android:exported="false"/>
+
+        <activity android:name=".public_screens.WelcomeActivity"
+            android:exported="false"/>
+        <activity android:name=".private_screens.PrivateActivity"
             android:exported="false"/>
         <activity
             android:name=".MainActivity"

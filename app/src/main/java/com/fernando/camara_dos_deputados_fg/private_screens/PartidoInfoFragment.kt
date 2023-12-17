@@ -9,15 +9,14 @@ import androidx.navigation.fragment.navArgs
 import com.fernando.camara_dos_deputados_fg.api.CamaraDosDeputadosAPI
 import com.fernando.camara_dos_deputados_fg.databinding.FragmentPartidoInfoBinding
 import com.fernando.camara_dos_deputados_fg.dtos.PartidoResponse
-import com.fernando.camara_dos_deputados_fg.models.Partido
 import com.fernando.camara_dos_deputados_fg.services.PartidoService
+import com.fernando.camara_dos_deputados_fg.utils.ViewUtils
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class PartidoInfoFragment : Fragment() {
     private lateinit var binding: FragmentPartidoInfoBinding
-    private val args : PartidoInfoFragmentArgs by navArgs()
     private lateinit var partidoService: PartidoService
 
     override fun onCreateView(
@@ -34,24 +33,46 @@ class PartidoInfoFragment : Fragment() {
         requestPartido()
     }
 
+    private fun setRequestSuccessLoading() {
+        ViewUtils.setVisibility(binding.partidoInfoView, true)
+        ViewUtils.setVisibility(binding.loading, false)
+    }
+
+    private fun setRequestErrorLoading() {
+        ViewUtils.setVisibility(binding.partidoInfoView, false)
+        ViewUtils.setVisibility(binding.loading, false)
+    }
+
+    private fun setRequestStartLoading() {
+        ViewUtils.setVisibility(binding.partidoInfoView, false)
+        ViewUtils.setVisibility(binding.loading, true)
+    }
+
+
+
     private fun requestPartido() {
-        val partidoID = args.id
+        val partidoID = requireArguments().getLong("id")
+        setRequestStartLoading()
 
         partidoService.findPartidoByID(partidoID).enqueue(object: Callback<PartidoResponse>{
             override fun onResponse(call: Call<PartidoResponse>, response: Response<PartidoResponse>) {
                 if (response.isSuccessful) {
                     val partidoResponse = response.body()
                     val partido = partidoResponse?.partido
+                    setRequestSuccessLoading()
+
 
                     binding.apply {
-                        partidoNomeTextView.text = partido?.nome
-                        partidoSiglaTextView.text = partido?.sigla
+                        partido?.let {
+                            nomeCardText.setText(it.nome)
+                            siglaCardText.setText(it.sigla)
+                        }
                     }
                 }
             }
 
             override fun onFailure(call: Call<PartidoResponse>, t: Throwable) {
-                println(t.message)
+                setRequestErrorLoading()
             }
 
         })

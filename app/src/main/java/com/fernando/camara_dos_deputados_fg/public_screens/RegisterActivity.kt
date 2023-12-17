@@ -1,37 +1,18 @@
 package com.fernando.camara_dos_deputados_fg.public_screens
 
-import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
-import com.fernando.camara_dos_deputados_fg.R
-import com.fernando.camara_dos_deputados_fg.databinding.FragmentRegisterBinding
+import com.fernando.camara_dos_deputados_fg.ActivityViewBinding
 import com.fernando.camara_dos_deputados_fg.constants.Regex
+import com.fernando.camara_dos_deputados_fg.databinding.ActivityRegisterBinding
 import com.fernando.camara_dos_deputados_fg.factories.AlertDialogFactory.Companion.createEmailAndPasswordErrorDialog
 import com.google.firebase.auth.FirebaseAuth
 
-class RegisterFragment : Fragment() {
-    private lateinit var binding: FragmentRegisterBinding
-    private lateinit var navController: NavController
+class RegisterActivity : ActivityViewBinding<ActivityRegisterBinding>() {
     private lateinit var firebaseAuth: FirebaseAuth
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?): View {
-        binding = FragmentRegisterBinding.inflate(inflater, container, false)
-        initNavigationController()
-        return binding.root
-    }
 
-
-    override fun onResume() {
-        super.onResume()
-        initListeners()
+    override fun inflate(layoutInflater: LayoutInflater): ActivityRegisterBinding {
+        return ActivityRegisterBinding.inflate(layoutInflater)
     }
 
     override fun onStart() {
@@ -39,9 +20,7 @@ class RegisterFragment : Fragment() {
         firebaseAuth = FirebaseAuth.getInstance()
     }
 
-    private fun initNavigationController() {
-        navController = NavHostFragment.findNavController(this)
-    }
+
 
     private fun initListeners() {
         binding.apply {
@@ -62,9 +41,7 @@ class RegisterFragment : Fragment() {
                             if (authResult.credential != null) {
                                 firebaseAuth.signInWithCredential(authResult.credential!!)
                                     .addOnSuccessListener {
-                                        findNavController().navigate(
-                                            R.id.action_registerFragment_to_privateActivity
-                                        )
+
                                     }
                             }
                         }
