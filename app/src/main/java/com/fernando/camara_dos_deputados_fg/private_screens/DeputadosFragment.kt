@@ -4,7 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.fragment.app.commit
 import com.fernando.camara_dos_deputados_fg.FragmentViewBinding
+import com.fernando.camara_dos_deputados_fg.R
 import com.fernando.camara_dos_deputados_fg.adapters.CardSkeletonAdapter
 import com.fernando.camara_dos_deputados_fg.adapters.DeputadoAdapter
 import com.fernando.camara_dos_deputados_fg.api.CamaraDosDeputadosAPI
@@ -51,13 +54,24 @@ class DeputadosFragment : FragmentViewBinding<FragmentDeputadosBinding>() {
 
     private fun setRecylerViewWithDeputadoAdapter(deputados: List<Deputado>) {
         val deputadoAdapter = DeputadoAdapter(deputados)
+
+        deputadoAdapter.setOnClickAdapterItemListener {
+            val args = bundleOf("id" to it.id)
+            val deputadoInfoFragment = DeputadoInfoFragment()
+            deputadoInfoFragment.arguments = args
+
+            activity?.supportFragmentManager?.commit {
+                replace(R.id.fragmentContainer, deputadoInfoFragment)
+            }
+        }
+
         binding.recyclerView.adapter = deputadoAdapter
+
     }
 
 
     private fun requestDeputados() {
-        deputadoService.findAllDeputados("ASC", "nome", 500)
-            .enqueue(object: Callback<DeputadoList>{
+        deputadoService.findAllDeputados("ASC", "nome", 500).enqueue(object: Callback<DeputadoList>{
                 override fun onResponse(call: Call<DeputadoList>, response: Response<DeputadoList>) {
                     if (binding.root.isRefreshing) {
                         binding.root.isRefreshing = false

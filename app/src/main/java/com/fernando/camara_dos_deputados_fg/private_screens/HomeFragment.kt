@@ -56,18 +56,15 @@ class HomeFragment : FragmentViewBinding<FragmentHomeBinding>() {
     private fun setRecylerViewWithPartidoAdapter(partidos: List<Partido>) {
         val partidoAdapter = PartidoAdapter(partidos)
 
-        partidoAdapter.setOnClickAdapterItemListener(object: OnClickAdapterItemListener<Partido>{
-            override fun onClickAdapterItem(item: Partido) {
-                val args = bundleOf("id" to item.id)
-                val partidoInfoFragment = PartidoInfoFragment()
+        partidoAdapter.setOnClickAdapterItemListener {
+            val args = bundleOf("id" to it.id)
+            val partidoInfoFragment = PartidoInfoFragment()
+            partidoInfoFragment.arguments = args
 
-                partidoInfoFragment.arguments = args
-
-                activity?.supportFragmentManager?.commit {
-                    replace(R.id.fragmentContainer, partidoInfoFragment)
-                }
+            activity?.supportFragmentManager?.commit {
+                replace(R.id.fragmentContainer, partidoInfoFragment)
             }
-        })
+        }
 
         binding.recyclerView.adapter = partidoAdapter
     }

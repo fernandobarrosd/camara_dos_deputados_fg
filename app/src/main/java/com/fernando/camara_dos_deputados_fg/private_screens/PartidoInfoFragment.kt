@@ -57,17 +57,9 @@ class PartidoInfoFragment : FragmentViewBinding<FragmentPartidoInfoBinding>() {
         partidoService.findPartidoByID(partidoID).enqueue(object: Callback<PartidoResponse>{
             override fun onResponse(call: Call<PartidoResponse>, response: Response<PartidoResponse>) {
                 if (response.isSuccessful) {
-                    val partidoResponse = response.body()
-                    val partido = partidoResponse?.partido
                     setRequestSuccessLoading()
-
-
-                    binding.apply {
-                        partido?.let {
-                            nomeCardText.setText(it.nome)
-                            siglaCardText.setText(it.sigla)
-                        }
-                    }
+                    val partido = response.body()
+                    setPartidoInfo(partido)
                 }
             }
 
@@ -76,6 +68,15 @@ class PartidoInfoFragment : FragmentViewBinding<FragmentPartidoInfoBinding>() {
             }
 
         })
+    }
+
+    private fun setPartidoInfo(partido: PartidoResponse?) {
+        binding.apply {
+            partido?.partido?.let {
+                nomeCardText.setText(it.nome)
+                siglaCardText.setText(it.sigla)
+            }
+        }
     }
 
     private fun initService() {
