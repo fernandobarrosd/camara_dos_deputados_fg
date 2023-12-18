@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import com.fernando.camara_dos_deputados_fg.FragmentViewBinding
 import com.fernando.camara_dos_deputados_fg.adapters.CardSkeletonAdapter
 import com.fernando.camara_dos_deputados_fg.adapters.DeputadoAdapter
 import com.fernando.camara_dos_deputados_fg.api.CamaraDosDeputadosAPI
@@ -16,17 +16,15 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class DeputadosFragment : Fragment() {
-    private lateinit var binding: FragmentDeputadosBinding
+class DeputadosFragment : FragmentViewBinding<FragmentDeputadosBinding>() {
     private lateinit var deputadoService: DeputadoService
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
+    override fun inflate(
+        layoutInflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?): View {
-        binding = FragmentDeputadosBinding.inflate(inflater, container, false)
-        return binding.root
+        atachToParent: Boolean?): FragmentDeputadosBinding {
+        return FragmentDeputadosBinding.inflate(layoutInflater, container, false)
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
+import com.fernando.camara_dos_deputados_fg.FragmentViewBinding
 import com.fernando.camara_dos_deputados_fg.R
 import com.fernando.camara_dos_deputados_fg.adapters.CardSkeletonAdapter
 import com.fernando.camara_dos_deputados_fg.adapters.PartidoAdapter
@@ -20,16 +20,15 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class HomeFragment : Fragment() {
-    private lateinit var binding: FragmentHomeBinding
+class HomeFragment : FragmentViewBinding<FragmentHomeBinding>() {
     private lateinit var partidoService: PartidoService
-    override fun onCreateView(
-        inflater: LayoutInflater,
+    override fun inflate(
+        layoutInflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?): View {
-        binding = FragmentHomeBinding.inflate(inflater, container, false)
-        return binding.root
+        atachToParent: Boolean?): FragmentHomeBinding {
+        return FragmentHomeBinding.inflate(layoutInflater, container, false)
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

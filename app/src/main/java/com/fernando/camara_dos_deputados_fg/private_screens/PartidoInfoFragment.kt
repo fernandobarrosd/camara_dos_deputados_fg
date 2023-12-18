@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
+import com.fernando.camara_dos_deputados_fg.FragmentViewBinding
 import com.fernando.camara_dos_deputados_fg.api.CamaraDosDeputadosAPI
+import com.fernando.camara_dos_deputados_fg.databinding.FragmentDeputadosBinding
 import com.fernando.camara_dos_deputados_fg.databinding.FragmentPartidoInfoBinding
 import com.fernando.camara_dos_deputados_fg.dtos.PartidoResponse
 import com.fernando.camara_dos_deputados_fg.services.PartidoService
@@ -15,16 +17,14 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class PartidoInfoFragment : Fragment() {
-    private lateinit var binding: FragmentPartidoInfoBinding
+class PartidoInfoFragment : FragmentViewBinding<FragmentPartidoInfoBinding>() {
     private lateinit var partidoService: PartidoService
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
+    override fun inflate(
+        layoutInflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?): View {
-        binding = FragmentPartidoInfoBinding.inflate(inflater, container, false)
-        return binding.root
+        atachToParent: Boolean?): FragmentPartidoInfoBinding {
+        return FragmentPartidoInfoBinding.inflate(layoutInflater, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
