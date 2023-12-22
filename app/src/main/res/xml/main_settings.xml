@@ -2,12 +2,6 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <Preference
-        app:key="updatePassword"
-        app:title="Atualizar senha"
-        app:summary="Atualizar a senha da conta"
-        app:layout="@layout/layout_preference"/>
-
 
     <Preference
         app:key="logout"

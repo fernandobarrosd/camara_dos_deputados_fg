@@ -12,17 +12,10 @@ import androidx.fragment.app.commit
 import com.fernando.camara_dos_deputados_fg.ui.utils.FragmentViewBinding
 import com.fernando.camara_dos_deputados_fg.R
 import com.fernando.camara_dos_deputados_fg.databinding.FragmentDeputadosBinding
-import com.fernando.camara_dos_deputados_fg.dtos.DeputadoList
 import com.fernando.camara_dos_deputados_fg.models.Deputado
-import com.fernando.camara_dos_deputados_fg.api.services.DeputadoService
 import com.fernando.camara_dos_deputados_fg.ui.authenticated.viewModels.DeputadosFragmentViewModel
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class DeputadosFragment : FragmentViewBinding<FragmentDeputadosBinding>() {
-    private lateinit var deputadoService: DeputadoService
-
     private val deputadosFragmentViewModel by viewModels<DeputadosFragmentViewModel>()
 
     override fun inflate(

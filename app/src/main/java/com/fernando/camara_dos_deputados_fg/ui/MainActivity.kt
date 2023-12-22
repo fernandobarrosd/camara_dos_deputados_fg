@@ -14,16 +14,20 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
     }
 
+
     override fun onStart() {
         super.onStart()
         val firebaseAuth = FirebaseAuth.getInstance()
 
+
         if (firebaseAuth.currentUser != null) {
             startActivity(Intent(this, PrivateActivity::class.java))
+            finish()
         }
         else {
             startActivity(Intent(this, WelcomeActivity::class.java))
+            finish()
         }
-        finish()
+
     }
 }

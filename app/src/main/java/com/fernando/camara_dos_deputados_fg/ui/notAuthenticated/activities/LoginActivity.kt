@@ -69,8 +69,7 @@ class LoginActivity : ActivityViewBinding<ActivityLoginBinding>() {
     }
 
     private fun goToAuthenticatedScreens() {
-        startActivity(Intent(this, PrivateActivity::class.java))
-        finish()
+        startActivity(Intent(this@LoginActivity, PrivateActivity::class.java))
     }
 
 

@@ -15,6 +15,7 @@ import com.fernando.camara_dos_deputados_fg.ui.utils.ViewUtils
 
 class PartidoInfoFragment : FragmentViewBinding<FragmentPartidoInfoBinding>() {
     private val partidoInfoFragmentVewModel by viewModels<PartidoInfoFragmentViewModel>()
+
     override fun inflate(
         layoutInflater: LayoutInflater,
         container: ViewGroup?,

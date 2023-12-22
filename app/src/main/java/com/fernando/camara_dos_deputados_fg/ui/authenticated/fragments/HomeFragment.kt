@@ -19,6 +19,7 @@ import com.fernando.camara_dos_deputados_fg.ui.authenticated.viewModels.HomeFrag
 
 class HomeFragment : FragmentViewBinding<FragmentHomeBinding>() {
     private val homeFragmentViewModel by viewModels<HomeFragmentViewModel>()
+
     override fun inflate(
         layoutInflater: LayoutInflater,
 
