@@ -8,7 +8,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
-import com.fernando.camara_dos_deputados_fg.ActivityViewBinding
+import com.fernando.camara_dos_deputados_fg.ui.utils.ActivityViewBinding
 import com.fernando.camara_dos_deputados_fg.databinding.ActivityPrivateBinding
 import com.fernando.camara_dos_deputados_fg.R
 import com.fernando.camara_dos_deputados_fg.ui.authenticated.fragments.DeputadosFragment
@@ -68,6 +68,7 @@ class PrivateActivity : ActivityViewBinding<ActivityPrivateBinding>() {
 
     private fun goToWelcomeScreen() {
         startActivity(Intent(this, WelcomeActivity::class.java))
+        finish()
     }
 
     private fun initFirstScreen() {

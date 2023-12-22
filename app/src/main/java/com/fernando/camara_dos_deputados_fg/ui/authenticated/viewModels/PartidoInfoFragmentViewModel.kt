@@ -17,7 +17,7 @@ class PartidoInfoFragmentViewModel : ViewModel() {
     val partido : LiveData<Partido> = _partido
     val errorMessage : LiveData<String> = _errorMessage
 
-    fun requestPartido(partidoID: Long) {
+    fun requestPartidoByID(partidoID: Long) {
         val partidoService = CamaraDosDeputadosAPI.partidoService
 
         partidoService.findPartidoByID(partidoID).enqueue(object: Callback<PartidoResponse>{

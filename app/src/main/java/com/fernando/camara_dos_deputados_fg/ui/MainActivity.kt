@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, PrivateActivity::class.java))
         }
         else {
-            startActivity(Intent(this, PrivateActivity::class.java))
+            startActivity(Intent(this, WelcomeActivity::class.java))
         }
         finish()
     }

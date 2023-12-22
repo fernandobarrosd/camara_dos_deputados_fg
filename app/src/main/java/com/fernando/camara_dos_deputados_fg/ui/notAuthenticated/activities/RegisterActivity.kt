@@ -2,11 +2,10 @@ package com.fernando.camara_dos_deputados_fg.ui.notAuthenticated.activities
 
 import android.content.Intent
 import android.view.LayoutInflater
-import com.fernando.camara_dos_deputados_fg.ActivityViewBinding
+import com.fernando.camara_dos_deputados_fg.ui.utils.ActivityViewBinding
 import com.fernando.camara_dos_deputados_fg.constants.Regex
 import com.fernando.camara_dos_deputados_fg.databinding.ActivityRegisterBinding
 import com.fernando.camara_dos_deputados_fg.factories.AlertDialogFactory.Companion.createEmailAndPasswordErrorDialog
-import com.fernando.camara_dos_deputados_fg.private_screens.PrivateActivity
 import com.google.firebase.auth.FirebaseAuth
 
 class RegisterActivity : ActivityViewBinding<ActivityRegisterBinding>() {
@@ -17,11 +16,16 @@ class RegisterActivity : ActivityViewBinding<ActivityRegisterBinding>() {
         return ActivityRegisterBinding.inflate(layoutInflater)
     }
 
+
     override fun onStart() {
         super.onStart()
         firebaseAuth = FirebaseAuth.getInstance()
     }
 
+    override fun onResume() {
+        super.onResume()
+        initListeners()
+    }
 
 
     private fun initListeners() {
@@ -39,14 +43,8 @@ class RegisterActivity : ActivityViewBinding<ActivityRegisterBinding>() {
                 } else {
                     registerButton.isClickable = false
                     firebaseAuth.createUserWithEmailAndPassword(email, password)
-                        .addOnSuccessListener { authResult ->
-                            if (authResult.credential != null) {
-                                firebaseAuth.signInWithCredential(authResult.credential!!)
-                                    .addOnSuccessListener {
-                                        startActivity(Intent(applicationContext, PrivateActivity::class.java))
-                                    }
-                            }
-                        }
+                        .addOnSuccessListener { _ ->
+                            startActivity(Intent(this@RegisterActivity, LoginActivity::class.java)) }
                         .addOnFailureListener {
                             emailAndPasswordErrorDialog!!.show()
                         }

@@ -6,32 +6,22 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.commit
-<<<<<<< HEAD:app/src/main/java/com/fernando/camara_dos_deputados_fg/ui/authenticated/fragments/HomeFragment.kt
+
 import androidx.fragment.app.viewModels
-=======
-import com.fernando.camara_dos_deputados_fg.FragmentViewBinding
->>>>>>> 8b1e9744cb8dd365c6074ea715055e9b21296dd6:app/src/main/java/com/fernando/camara_dos_deputados_fg/private_screens/HomeFragment.kt
+
+import com.fernando.camara_dos_deputados_fg.ui.utils.FragmentViewBinding
 import com.fernando.camara_dos_deputados_fg.R
 import com.fernando.camara_dos_deputados_fg.ui.adapters.CardSkeletonAdapter
 import com.fernando.camara_dos_deputados_fg.ui.adapters.PartidoAdapter
 import com.fernando.camara_dos_deputados_fg.databinding.FragmentHomeBinding
-import com.fernando.camara_dos_deputados_fg.interfaces.OnClickAdapterItemListener
 import com.fernando.camara_dos_deputados_fg.models.Partido
 import com.fernando.camara_dos_deputados_fg.ui.authenticated.viewModels.HomeFragmentViewModel
 
-<<<<<<< HEAD:app/src/main/java/com/fernando/camara_dos_deputados_fg/ui/authenticated/fragments/HomeFragment.kt
-class HomeFragment : Fragment() {
-    private lateinit var binding: FragmentHomeBinding
-    private val homeFragmentViewModel by viewModels<HomeFragmentViewModel>()
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-=======
 class HomeFragment : FragmentViewBinding<FragmentHomeBinding>() {
-    private lateinit var partidoService: PartidoService
+    private val homeFragmentViewModel by viewModels<HomeFragmentViewModel>()
     override fun inflate(
         layoutInflater: LayoutInflater,
->>>>>>> 8b1e9744cb8dd365c6074ea715055e9b21296dd6:app/src/main/java/com/fernando/camara_dos_deputados_fg/private_screens/HomeFragment.kt
+
         container: ViewGroup?,
         atachToParent: Boolean?): FragmentHomeBinding {
         return FragmentHomeBinding.inflate(layoutInflater, container, false)

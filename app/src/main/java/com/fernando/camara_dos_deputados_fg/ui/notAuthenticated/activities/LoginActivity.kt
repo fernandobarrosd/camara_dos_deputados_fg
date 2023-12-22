@@ -7,7 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
-import com.fernando.camara_dos_deputados_fg.ActivityViewBinding
+import com.fernando.camara_dos_deputados_fg.ui.utils.ActivityViewBinding
 import com.fernando.camara_dos_deputados_fg.constants.Regex
 import com.fernando.camara_dos_deputados_fg.databinding.ActivityLoginBinding
 import com.fernando.camara_dos_deputados_fg.factories.AlertDialogFactory.Companion.createEmailAndPasswordErrorDialog
@@ -22,13 +22,13 @@ class LoginActivity : ActivityViewBinding<ActivityLoginBinding>() {
     private lateinit var googleSignActivityResultLauncher: ActivityResultLauncher<Intent>
     private lateinit var signInClient: GoogleSignInClient
     private lateinit var firebaseAuth: FirebaseAuth
+    override fun inflate(layoutInflater: LayoutInflater): ActivityLoginBinding {
+        return ActivityLoginBinding.inflate(layoutInflater)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initActivityResultLauncher()
-    }
-    override fun inflate(layoutInflater: LayoutInflater): ActivityLoginBinding {
-        return ActivityLoginBinding.inflate(layoutInflater)
     }
 
     override fun onStart() {
@@ -53,7 +53,7 @@ class LoginActivity : ActivityViewBinding<ActivityLoginBinding>() {
                             val authCredential =
                                 GoogleAuthProvider.getCredential(account.idToken, null)
                             firebaseAuth.signInWithCredential(authCredential)
-                                .addOnSuccessListener { goToPrivateScreens() }
+                                .addOnSuccessListener { goToAuthenticatedScreens() }
                                 .addOnFailureListener {
                                     val loginErrorAlert = AlertDialog.Builder(this).apply {
                                         setTitle("Erro no login")
@@ -68,7 +68,7 @@ class LoginActivity : ActivityViewBinding<ActivityLoginBinding>() {
             }
     }
 
-    private fun goToPrivateScreens() {
+    private fun goToAuthenticatedScreens() {
         startActivity(Intent(this, PrivateActivity::class.java))
         finish()
     }
@@ -90,7 +90,7 @@ class LoginActivity : ActivityViewBinding<ActivityLoginBinding>() {
                 } else {
                     loginButton.isClickable = false
                     firebaseAuth.signInWithEmailAndPassword(email, password)
-                        .addOnSuccessListener { goToPrivateScreens() }
+                        .addOnSuccessListener { goToAuthenticatedScreens() }
                         .addOnFailureListener { emailAndPasswordErrorDialog?.show() }
                         .addOnCompleteListener { binding.loginButton.isClickable = true }
                 }

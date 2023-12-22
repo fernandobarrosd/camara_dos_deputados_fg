@@ -6,7 +6,7 @@ import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.view.LayoutInflater
-import com.fernando.camara_dos_deputados_fg.ActivityViewBinding
+import com.fernando.camara_dos_deputados_fg.ui.utils.ActivityViewBinding
 import com.fernando.camara_dos_deputados_fg.databinding.ActivityWelcomeBinding
 
 class WelcomeActivity : ActivityViewBinding<ActivityWelcomeBinding>() {
@@ -60,12 +60,10 @@ class WelcomeActivity : ActivityViewBinding<ActivityWelcomeBinding>() {
         binding.let {
             it.loginButton.setOnClickListener {
                 startActivity(Intent(this, LoginActivity::class.java))
-                finish()
             }
 
             it.registerButton.setOnClickListener {
                 startActivity(Intent(this, RegisterActivity::class.java))
-                finish()
             }
         }
     }

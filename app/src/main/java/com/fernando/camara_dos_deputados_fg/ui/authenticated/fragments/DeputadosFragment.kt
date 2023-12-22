@@ -9,7 +9,7 @@ import com.fernando.camara_dos_deputados_fg.ui.adapters.CardSkeletonAdapter
 import com.fernando.camara_dos_deputados_fg.ui.adapters.DeputadoAdapter
 import androidx.core.os.bundleOf
 import androidx.fragment.app.commit
-import com.fernando.camara_dos_deputados_fg.FragmentViewBinding
+import com.fernando.camara_dos_deputados_fg.ui.utils.FragmentViewBinding
 import com.fernando.camara_dos_deputados_fg.R
 import com.fernando.camara_dos_deputados_fg.databinding.FragmentDeputadosBinding
 import com.fernando.camara_dos_deputados_fg.dtos.DeputadoList
@@ -37,7 +37,7 @@ class DeputadosFragment : FragmentViewBinding<FragmentDeputadosBinding>() {
         super.onViewCreated(view, savedInstanceState)
         setRecylerViewWithCardSkeletonAdapter()
         initObservables()
-        deputadosFragmentViewModel.requestDeputados()
+        requestDeputados()
         initListener()
     }
 
@@ -86,23 +86,6 @@ class DeputadosFragment : FragmentViewBinding<FragmentDeputadosBinding>() {
 
 
     private fun requestDeputados() {
-        deputadoService.findAllDeputados("ASC", "nome", 500).enqueue(object: Callback<DeputadoList>{
-                override fun onResponse(call: Call<DeputadoList>, response: Response<DeputadoList>) {
-                    if (binding.root.isRefreshing) {
-                        binding.root.isRefreshing = false
-                    }
-                    if (response.isSuccessful) {
-                        response.body()?.let {
-                            val deputados = it.deputados
-                            setRecylerViewWithDeputadoAdapter(deputados)
-                        }
-                    }
-                }
-
-                override fun onFailure(call: Call<DeputadoList>, t: Throwable) {
-                    binding.recyclerView.adapter = null
-                }
-
-            })
+        deputadosFragmentViewModel.requestDeputados()
     }
 }
