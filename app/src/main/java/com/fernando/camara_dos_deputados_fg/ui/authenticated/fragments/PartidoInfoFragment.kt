@@ -22,8 +22,6 @@ class PartidoInfoFragment : FragmentViewBinding<FragmentPartidoInfoBinding>() {
         return FragmentPartidoInfoBinding.inflate(layoutInflater, container, false)
     }
 
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initOnBackHandler()
