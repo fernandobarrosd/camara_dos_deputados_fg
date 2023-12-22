@@ -1,4 +1,4 @@
-package com.fernando.camara_dos_deputados_fg.private_screens
+package com.fernando.camara_dos_deputados_fg.ui.authenticated.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,22 +7,19 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
+import androidx.fragment.app.viewModels
 import com.fernando.camara_dos_deputados_fg.R
-import com.fernando.camara_dos_deputados_fg.adapters.CardSkeletonAdapter
-import com.fernando.camara_dos_deputados_fg.adapters.PartidoAdapter
-import com.fernando.camara_dos_deputados_fg.api.CamaraDosDeputadosAPI
+import com.fernando.camara_dos_deputados_fg.ui.adapters.CardSkeletonAdapter
+import com.fernando.camara_dos_deputados_fg.ui.adapters.PartidoAdapter
 import com.fernando.camara_dos_deputados_fg.databinding.FragmentHomeBinding
-import com.fernando.camara_dos_deputados_fg.dtos.PartidoList
 import com.fernando.camara_dos_deputados_fg.interfaces.OnClickAdapterItemListener
 import com.fernando.camara_dos_deputados_fg.models.Partido
-import com.fernando.camara_dos_deputados_fg.services.PartidoService
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.fernando.camara_dos_deputados_fg.ui.authenticated.viewModels.HomeFragmentViewModel
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
-    private lateinit var partidoService: PartidoService
+    private val homeFragmentViewModel by viewModels<HomeFragmentViewModel>()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -33,23 +30,33 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initService()
         setRecylerViewWithCardSkeletonAdapter()
-        requestPartidos()
+        initObservables()
+        homeFragmentViewModel.requestPartidos()
         initListeners()
+    }
 
+    private fun initObservables() {
+        homeFragmentViewModel.partidos.observe(requireActivity()) {
+            if (binding.root.isRefreshing) {
+                binding.root.isRefreshing = false
+            }
+            setRecylerViewWithPartidoAdapter(it)
+        }
+
+        homeFragmentViewModel.errorMessage.observe(requireActivity()) {
+            binding.recyclerView.adapter = null
+        }
     }
 
     private fun initListeners() {
         binding.root.setOnRefreshListener {
             setRecylerViewWithCardSkeletonAdapter()
-            requestPartidos()
+            homeFragmentViewModel.requestPartidos()
         }
     }
 
-    private fun initService() {
-        partidoService = CamaraDosDeputadosAPI.partidoService
-    }
+
 
     private fun setRecylerViewWithCardSkeletonAdapter() {
         binding.recyclerView.adapter = CardSkeletonAdapter()
@@ -71,29 +78,5 @@ class HomeFragment : Fragment() {
         })
 
         binding.recyclerView.adapter = partidoAdapter
-    }
-
-    private fun requestPartidos() {
-        partidoService.findAllPartidos().enqueue(object: Callback<PartidoList> {
-            override fun onResponse(call: Call<PartidoList>, response: Response<PartidoList>) {
-                if (binding.root.isRefreshing) {
-                    binding.root.isRefreshing = false
-                }
-                if (response.isSuccessful) {
-                    val partidos = response.body()
-
-                    partidos?.let {
-                        requireActivity().runOnUiThread {
-                            setRecylerViewWithPartidoAdapter(it.partidos)
-                        }
-                    }
-                }
-            }
-
-            override fun onFailure(call: Call<PartidoList>, t: Throwable) {
-                binding.recyclerView.adapter = null
-            }
-
-        })
     }
 }

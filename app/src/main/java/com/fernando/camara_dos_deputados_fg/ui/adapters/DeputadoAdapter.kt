@@ -1,4 +1,4 @@
-package com.fernando.camara_dos_deputados_fg.adapters
+package com.fernando.camara_dos_deputados_fg.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

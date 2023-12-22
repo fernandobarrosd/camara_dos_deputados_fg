@@ -14,21 +14,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CamaraDosDeputadosFG">
 
-        <activity android:name=".private_screens.UpdatePasswordActivity"
+        <activity android:name=".ui.authenticated.activities.UpdatePasswordActivity"
             android:exported="false"/>
 
-        <activity android:name=".public_screens.LoginActivity"
+        <activity android:name=".ui.notAuthenticated.activities.LoginActivity"
             android:exported="false"/>
 
-        <activity android:name=".public_screens.RegisterActivity"
+        <activity android:name=".ui.notAuthenticated.activities.RegisterActivity"
             android:exported="false"/>
 
-        <activity android:name=".public_screens.WelcomeActivity"
+        <activity android:name=".ui.notAuthenticated.activities.WelcomeActivity"
             android:exported="false"/>
-        <activity android:name=".private_screens.PrivateActivity"
+        <activity android:name=".ui.authenticated.activities.PrivateActivity"
             android:exported="false"/>
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

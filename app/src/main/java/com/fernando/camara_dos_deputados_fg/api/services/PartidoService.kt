@@ -1,4 +1,4 @@
-package com.fernando.camara_dos_deputados_fg.services
+package com.fernando.camara_dos_deputados_fg.api.services
 
 import com.fernando.camara_dos_deputados_fg.dtos.PartidoList
 import com.fernando.camara_dos_deputados_fg.dtos.PartidoResponse

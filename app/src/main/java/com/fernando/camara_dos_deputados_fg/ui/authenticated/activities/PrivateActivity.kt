@@ -1,22 +1,21 @@
-package com.fernando.camara_dos_deputados_fg.private_screens
+package com.fernando.camara_dos_deputados_fg.ui.authenticated.activities
 
 import android.app.AlertDialog
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.AdapterView.OnItemSelectedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.NavigationUI.setupWithNavController
 import com.fernando.camara_dos_deputados_fg.ActivityViewBinding
-import com.fernando.camara_dos_deputados_fg.MainActivity
 import com.fernando.camara_dos_deputados_fg.databinding.ActivityPrivateBinding
 import com.fernando.camara_dos_deputados_fg.R
-import com.fernando.camara_dos_deputados_fg.public_screens.WelcomeActivity
+import com.fernando.camara_dos_deputados_fg.ui.authenticated.fragments.DeputadosFragment
+import com.fernando.camara_dos_deputados_fg.ui.authenticated.fragments.HomeFragment
+import com.fernando.camara_dos_deputados_fg.ui.authenticated.fragments.ProfileFragment
+import com.fernando.camara_dos_deputados_fg.ui.authenticated.fragments.SettingsFragment
+import com.fernando.camara_dos_deputados_fg.ui.notAuthenticated.activities.WelcomeActivity
 import com.google.firebase.auth.FirebaseAuth
 
 class PrivateActivity : ActivityViewBinding<ActivityPrivateBinding>() {

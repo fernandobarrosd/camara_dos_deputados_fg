@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/green"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".private_screens.HomeFragment">
+    tools:context=".ui.authenticated.fragments.HomeFragment">
 
 
     <androidx.recyclerview.widget.RecyclerView

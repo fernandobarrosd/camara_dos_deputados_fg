@@ -1,4 +1,4 @@
-package com.fernando.camara_dos_deputados_fg.private_screens
+package com.fernando.camara_dos_deputados_fg.ui.authenticated.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

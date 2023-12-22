@@ -1,4 +1,4 @@
-package com.fernando.camara_dos_deputados_fg.public_screens
+package com.fernando.camara_dos_deputados_fg.ui.notAuthenticated.activities
 
 import android.app.AlertDialog
 import android.content.Context
@@ -8,7 +8,6 @@ import android.net.NetworkCapabilities
 import android.view.LayoutInflater
 import com.fernando.camara_dos_deputados_fg.ActivityViewBinding
 import com.fernando.camara_dos_deputados_fg.databinding.ActivityWelcomeBinding
-import com.google.firebase.auth.FirebaseAuth
 
 class WelcomeActivity : ActivityViewBinding<ActivityWelcomeBinding>() {
     override fun inflate(layoutInflater: LayoutInflater): ActivityWelcomeBinding {

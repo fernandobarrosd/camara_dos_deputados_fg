@@ -1,4 +1,4 @@
-package com.fernando.camara_dos_deputados_fg.public_screens
+package com.fernando.camara_dos_deputados_fg.ui.notAuthenticated.activities
 
 import android.app.Activity
 import android.app.AlertDialog
@@ -12,7 +12,7 @@ import com.fernando.camara_dos_deputados_fg.constants.Regex
 import com.fernando.camara_dos_deputados_fg.databinding.ActivityLoginBinding
 import com.fernando.camara_dos_deputados_fg.factories.AlertDialogFactory.Companion.createEmailAndPasswordErrorDialog
 import com.fernando.camara_dos_deputados_fg.factories.GoogleSignInClientFactory
-import com.fernando.camara_dos_deputados_fg.private_screens.PrivateActivity
+import com.fernando.camara_dos_deputados_fg.ui.authenticated.activities.PrivateActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.auth.FirebaseAuth

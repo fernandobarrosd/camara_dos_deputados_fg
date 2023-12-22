@@ -1,4 +1,4 @@
-package com.fernando.camara_dos_deputados_fg.components
+package com.fernando.camara_dos_deputados_fg.ui.components
 
 import android.content.Context
 import android.content.res.TypedArray

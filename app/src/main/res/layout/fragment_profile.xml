@@ -7,7 +7,7 @@
     android:background="@color/white"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".private_screens.ProfileFragment">
+    tools:context=".ui.authenticated.fragments.ProfileFragment">
 
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
@@ -24,7 +24,7 @@
 
 
 
-    <com.fernando.camara_dos_deputados_fg.components.CardText
+    <com.fernando.camara_dos_deputados_fg.ui.components.CardText
         android:id="@+id/emailCardText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

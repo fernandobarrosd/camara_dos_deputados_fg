@@ -1,11 +1,11 @@
-package com.fernando.camara_dos_deputados_fg
+package com.fernando.camara_dos_deputados_fg.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
-import com.fernando.camara_dos_deputados_fg.private_screens.PrivateActivity
-import com.fernando.camara_dos_deputados_fg.public_screens.WelcomeActivity
+import com.fernando.camara_dos_deputados_fg.R
+import com.fernando.camara_dos_deputados_fg.ui.authenticated.activities.PrivateActivity
+import com.fernando.camara_dos_deputados_fg.ui.notAuthenticated.activities.WelcomeActivity
 import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {

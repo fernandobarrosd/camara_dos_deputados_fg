@@ -1,4 +1,4 @@
-package com.fernando.camara_dos_deputados_fg.utils
+package com.fernando.camara_dos_deputados_fg.ui.utils
 
 import android.view.View
 

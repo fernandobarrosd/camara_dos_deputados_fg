@@ -1,24 +1,10 @@
 <resources>
     <string name="app_name">Camara dos Deputados FG</string>
-    <string name="client_id">867161998592-npovadv888f1o8q1tpc6014q6u1qtghr.apps.googleusercontent.com</string>
+    <string name="client_id">396285150909-6bnpmesi7u2nrmpg6jmv1fclqvquarlu.apps.googleusercontent.com</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="autenticated_menu_item_home_title">Início</string>
     <string name="autenticated_menu_item_deputados_title">Deputados</string>
     <string name="autenticated_menu_item_partidos_title">Partidos</string>
     <string name="autenticated_menu_item_settings_title">Settings</string>
     <string name="autenticated_menu_item_profile_title">Profile</string>
-    <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
-
-    <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
-
-    <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
-    </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
 </resources>

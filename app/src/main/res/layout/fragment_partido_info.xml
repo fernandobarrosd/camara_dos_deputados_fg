@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".private_screens.PartidoInfoFragment"
+    tools:context=".ui.authenticated.fragments.PartidoInfoFragment"
     android:orientation="vertical"
     android:gravity="center">
 
@@ -35,14 +35,14 @@
             android:src="@drawable/ic_person_group"
             app:tint="#CDC8C8" />
 
-        <com.fernando.camara_dos_deputados_fg.components.CardText
+        <com.fernando.camara_dos_deputados_fg.ui.components.CardText
             android:id="@+id/nomeCardText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:text="Nome: Partido dos Trabalhadores"
             android:layout_marginTop="20dp"/>
 
-        <com.fernando.camara_dos_deputados_fg.components.CardText
+        <com.fernando.camara_dos_deputados_fg.ui.components.CardText
             android:id="@+id/siglaCardText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

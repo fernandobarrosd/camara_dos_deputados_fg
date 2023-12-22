@@ -1,4 +1,4 @@
-package com.fernando.camara_dos_deputados_fg.public_screens
+package com.fernando.camara_dos_deputados_fg.ui.notAuthenticated.activities
 
 import android.view.LayoutInflater
 import com.fernando.camara_dos_deputados_fg.ActivityViewBinding

@@ -3,12 +3,7 @@ package com.fernando.camara_dos_deputados_fg.models
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 
-@JsonIgnoreProperties(
-    "uri",
-    "status",
-    "numeroEleitoral",
-    "urlLogo", "urlWebSite",
-    "urlFacebook")
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class Partido(
     @JsonProperty("id") val id: Long,
     @JsonProperty("sigla") val sigla: String,
