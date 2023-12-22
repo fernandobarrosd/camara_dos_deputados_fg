@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "396285150909",
+    "project_id": "camara-dos-deputados-fgv",
+    "storage_bucket": "camara-dos-deputados-fgv.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:396285150909:android:9aac59c59e6e708437d9d4",
+        "android_client_info": {
+          "package_name": "com.fernando.camara_dos_deputados_fg"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdqhqoBueadND8zsxcUJ2zmdNbR60QJzU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

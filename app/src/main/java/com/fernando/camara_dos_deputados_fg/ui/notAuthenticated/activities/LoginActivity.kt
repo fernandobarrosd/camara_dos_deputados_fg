@@ -53,9 +53,7 @@ class LoginActivity : ActivityViewBinding<ActivityLoginBinding>() {
                             val authCredential =
                                 GoogleAuthProvider.getCredential(account.idToken, null)
                             firebaseAuth.signInWithCredential(authCredential)
-                                .addOnSuccessListener {
-                                    goToPrivateScreens()
-                                }
+                                .addOnSuccessListener { goToPrivateScreens() }
                                 .addOnFailureListener {
                                     val loginErrorAlert = AlertDialog.Builder(this).apply {
                                         setTitle("Erro no login")
@@ -72,6 +70,7 @@ class LoginActivity : ActivityViewBinding<ActivityLoginBinding>() {
 
     private fun goToPrivateScreens() {
         startActivity(Intent(this, PrivateActivity::class.java))
+        finish()
     }
 
 

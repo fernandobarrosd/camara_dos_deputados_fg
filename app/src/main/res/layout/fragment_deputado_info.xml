@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.authenticated.fragments.PartidoInfoFragment"
+    tools:context=".ui.authenticated.fragments.DeputadoInfoFragment"
     android:orientation="vertical"
     android:gravity="center">
 
@@ -17,7 +17,7 @@
         android:indeterminate="true" />
 
     <LinearLayout
-        android:id="@+id/partidoInfoView"
+        android:id="@+id/deputadoInfoView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -26,26 +26,23 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:background="@color/white"
-            android:backgroundTint="#494545"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             android:padding="10dp"
-            android:src="@drawable/ic_person_group"
-            app:tint="#CDC8C8" />
+            android:src="@drawable/ic_congressman" />
 
         <com.fernando.camara_dos_deputados_fg.ui.components.CardText
             android:id="@+id/nomeCardText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:text="Nome: Partido dos Trabalhadores"
+            app:text="Nome: São Jorge"
             android:layout_marginTop="20dp"/>
 
         <com.fernando.camara_dos_deputados_fg.ui.components.CardText
-            android:id="@+id/siglaCardText"
+            android:id="@+id/siglaPartidoCardText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:text="Sigla: PT"
+            app:text="Sigla do partido: PT"
             android:layout_marginTop="20dp"/>
 
     </LinearLayout>

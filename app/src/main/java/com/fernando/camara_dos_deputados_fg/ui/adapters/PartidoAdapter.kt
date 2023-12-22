@@ -8,14 +8,14 @@ import com.fernando.camara_dos_deputados_fg.interfaces.OnClickAdapterItemListene
 import com.fernando.camara_dos_deputados_fg.models.Partido
 
 class PartidoAdapter(private val partidos: List<Partido>) : RecyclerView.Adapter<PartidoAdapter.PartidoViewHolder>() {
-    private lateinit var onClickAdapterItemListener: OnClickAdapterItemListener<Partido>
+    private lateinit var onClickAdapterItemListener: (partido: Partido) -> Unit
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PartidoViewHolder {
         val binding = ViewHolderPartidoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return PartidoViewHolder(binding)
     }
     
-    fun setOnClickAdapterItemListener(onClickAdapterItemListener: OnClickAdapterItemListener<Partido>) : Unit {
+    fun setOnClickAdapterItemListener(onClickAdapterItemListener: (partido: Partido) -> Unit) {
         this.onClickAdapterItemListener = onClickAdapterItemListener
     }
 
@@ -34,7 +34,7 @@ class PartidoAdapter(private val partidos: List<Partido>) : RecyclerView.Adapter
             }
 
             binding.root.setOnClickListener { 
-                onClickAdapterItemListener.onClickAdapterItem(partido)
+                onClickAdapterItemListener(partido)
             }
         }
     }

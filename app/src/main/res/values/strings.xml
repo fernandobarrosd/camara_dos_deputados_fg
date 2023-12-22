@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">Camara dos Deputados FG</string>
+<<<<<<< HEAD
     <string name="client_id">396285150909-6bnpmesi7u2nrmpg6jmv1fclqvquarlu.apps.googleusercontent.com</string>
+=======
+    <string name="client_id">867161998592-npovadv888f1o8q1tpc6014q6u1qtghr.apps.googleusercontent.com.com</string>
+>>>>>>> 8b1e9744cb8dd365c6074ea715055e9b21296dd6
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="autenticated_menu_item_home_title">Início</string>
     <string name="autenticated_menu_item_deputados_title">Deputados</string>

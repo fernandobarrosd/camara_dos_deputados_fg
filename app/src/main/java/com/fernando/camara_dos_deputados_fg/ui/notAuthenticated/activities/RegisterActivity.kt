@@ -1,10 +1,12 @@
 package com.fernando.camara_dos_deputados_fg.ui.notAuthenticated.activities
 
+import android.content.Intent
 import android.view.LayoutInflater
 import com.fernando.camara_dos_deputados_fg.ActivityViewBinding
 import com.fernando.camara_dos_deputados_fg.constants.Regex
 import com.fernando.camara_dos_deputados_fg.databinding.ActivityRegisterBinding
 import com.fernando.camara_dos_deputados_fg.factories.AlertDialogFactory.Companion.createEmailAndPasswordErrorDialog
+import com.fernando.camara_dos_deputados_fg.private_screens.PrivateActivity
 import com.google.firebase.auth.FirebaseAuth
 
 class RegisterActivity : ActivityViewBinding<ActivityRegisterBinding>() {
@@ -41,7 +43,7 @@ class RegisterActivity : ActivityViewBinding<ActivityRegisterBinding>() {
                             if (authResult.credential != null) {
                                 firebaseAuth.signInWithCredential(authResult.credential!!)
                                     .addOnSuccessListener {
-
+                                        startActivity(Intent(applicationContext, PrivateActivity::class.java))
                                     }
                             }
                         }
